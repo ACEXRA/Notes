@@ -1,0 +1,102 @@
+MY SQL
+SQL- Structured Query Language
+->SQL is a computer language we used to interact with relational database.
+->SQL is a tool for organising, managing and archievin data from computer database.
+
+Overview
+->DDL(Data definition language)
+ ->Data Definition Language (DDL) is a subset of SQL (Structured Query Language) used to define and manage the structure of database objects such as tables, indexes, views, etc.
+   It allows users to create, modify, and delete database objects.
+	->CREATE: Used to create new database objects like tables, indexes, views, etc.
+	->ALTER: Used to modify the structure of existing database objects.
+	->DROP: Used to delete database objects.
+	->TRUNCATE: Used to remove all records from a table, but it doesn't delete the table structure.
+	->RENAME: Used to rename an existing database object.
+	->COMMENT: Used to add comments to the data dictionary.
+-------------------------------------------------------------
+->DML(data manupulating language)
+ ->DML stands for Data Manipulation Language. It is a subset of SQL (Structured Query Language) used for manipulating data within the database.
+   DML statements are used to query, insert, update, and delete data in database tables.
+	->INSERT: Used to add new rows of data into a table.
+	->UPDATE: Used to modify existing data in a table.
+	->DELETE: Used to remove rows of data from a table.
+-----------------------------------------------------------------
+->DCL(data control language)
+ ->DCL stands for Data Control Language. It's a subset of SQL (Structured Query Language) used for controlling access to data within a database.
+DCL statements are primarily concerned with granting and revoking permissions and privileges to users and roles.
+	->GRANT: Used to give specific privileges to a user or a role.
+	->REVOKE: Used to take back previously granted privileges from a user or a role.
+-----------------------------------------------------------------------
+->TCL(Transaction control language)
+ ->TCL stands for Transaction Control Language. It's a subset of SQL (Structured Query Language) used to manage transactions within a database.
+Transactions are sequences of database operations that are treated as a single unit of work, meaning they must either all succeed or all fail.
+	->SAVEPOINT: This statement sets a named point within a transaction to which you can roll back if needed. It allows for finer-grained control over transaction rollback
+	->ROLLBACK: This statement is used to undo the changes made during the current transaction and restore the database to its state before the transaction began.
+	->COMMIT: This statement is used to permanently save the changes made during the current transaction. Once committed, the changes become visible to other transactions
+	->SET TRANSACTION: This statement sets properties for the current transaction, such as isolation level and access mode.
+---------------------------------------------------------------------------
+->DQL(data query language)
+ ->DQL stands for Data Query Language. It's a subset of SQL (Structured Query Language) used for querying data from a database.
+DQL statements are specifically designed for retrieving data and do not modify the data or the structure of the database.
+	->SELECT: This statement is used to retrieve data from one or more tables in the database based on specified criteria.
+	  It allows users to specify which columns they want to retrieve, filter rows based on conditions, and sort the results.E
+
+----------------------------------------------------
+
+DB level operations
+How to create a DB:
+->create database db_name;
+
+How to drop or delete a DB:
+->drop database db_name;
+
+How to backupDB
+->backup database db_name to disk="D:\1.RasheedAhamed\db_name.bak";  
+(this will backup the db in the filpath)
+
+->backup database db_name to disk="D:\1.RasheedAhamed\db_name.bak" with differential;
+(this will also take backup but if you already have backup it will take backup of all new changes)
+
+
+table operations
+->create table table_name(
+	column1 datatype,
+	column2 datatype,
+	column3 datatype,
+....);
+
+How to create a table form another table
+->CREATE TABLE new_table_name AS
+    SELECT column1, column2,...
+    FROM existing_table_name
+    WHERE ....;
+eg:create table testb as
+select id,name
+from testa;
+
+Delete a table 
+->drop table table_name (the table will be lost)
+or
+->truncate table table_name ( the table content lost but structure stays)
+
+-----------------------------------------------------------------------------------------------------
+DROP VS TRUNCATE
+Purpose: The DROP command is used to remove an entire database object, such as a table, view, index, or stored procedure, from the database.
+Effect: When you drop a table, for example, you permanently delete the table structure and all data contained within it. 
+This operation cannot be rolled back, and the table will need to be recreated if it is needed again.
+
+Purpose: The TRUNCATE command is used specifically to remove all rows from a table while keeping the table structure intact.
+Effect: When you truncate a table, you delete all rows from the table, effectively resetting it to an empty state.
+Unlike DROP, the table structure remains intact, and any associated triggers are not fired.
+------------------------------------------------------------------------------------------------------
+
+How to alter table contents:
+
+
+
+
+
+
+
+
+ 

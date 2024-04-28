@@ -1,0 +1,170 @@
+Java Interview Questions
+->marker interface:
+	->an interface with no method declaration is called marker interface example clonable and serialization
+
+->final keyword
+	->final variable ---> it make the variable constant
+	->final method   ---> it makes the method non overridable
+	->final classes  ---> final classes cannot be inherited
+
+->try catch finally
+	->try block has normal code which can cause exception
+	->the exception is catched by catch block. The catch block runs only of exception occurs
+	->finally block will run lastly in whatever case
+	->u can have multiple catch block, the order should low power exception should be in top
+	->normal a try block followed by catch and if needed finally use other no finally used
+	->without catch block we can use try but we need finally in that case
+	try{
+	}catch(){
+	}catch(){
+	}finally{}
+
+->try with resources
+	->it a new try block try(resources){}
+	->in the resources place we can have autoclosable resources EG: Scanner File reader etc.
+	->it autoclose so the need for finally block is not neccessary.
+
+->Autoclosable
+	->autoclosable or closable interface implemented class has .close() method eg:Scanner.close();
+
+->"==" and "equals"
+	-->"==" this will check reference equality, that it check does both refer to same objects in memory
+	-->"equals" this will check content equality that is it check the content in the objects
+
+->constructor and method difference
+	->A contructor is special method with same name as class and called during object creation
+	->While methods are called by object (one exception static method can be called by class)
+	->non-static methods can only be called by objects.
+	->static methods can be called by both class and objects.
+->overloading and overriding
+	->Method overloading occurs when a class has two or more methods with the same name but different parameters (types or number of parameters).
+	->method overload is static polymorphism becuz it happens in compile time.
+	-> Method overriding occurs when a subclass provides a specific implementation of a method that is already defined in its superclass.
+	->method overriding is dynamic polymorphism which happen in runtime
+
+->access speicifer
+	->it specifies the visibility and accessibility of the method, variable or class throughtout the project.
+	->public, default, protected, private
+->static
+	->It is a keyword that used to declare members(variables and method) that belong to class itself rather than objects.
+
+->Java Memory Management
+	->Java's garbage collector periodically runs in the background to reclaim memory occupied by objects that are no longer in use. 
+		When an object is no longer referenced by any live thread or it's explicitly set to null, it becomes eligible for garbage collection.
+
+->Multithreading
+	->a thread is sequence of instruction that run at given time in cpu.
+	->multithreading is concept if multiple threads runs concurrently within a single process.
+
+->Thread(class) and Runnable(interface)
+	->In java multithreading achieved by extending a class with thread or implements runnable interface
+
+->Thread
+	->It has run() method which need to be overrided for our requirements. Then obj.start() used to start the thread which executes the run() method overrided
+	-> there are inbuilt methods in thread please look it.
+
+->Runnable
+	->It is a funtional interface with run(), we need to implements the run().
+	->and create obj and start() the thread same as thread
+
+->Thread vs Runnable
+	->If we extend thread class then we cannot extend anyother class but we can implements so many interface so implementing runnable preferred.
+
+->Checked and Unchecked Exception
+	->checked exception are recoverable excetion it has to be handled by try catch method explicity.
+	->the programmer can continue the flow of program even an checked exception occur. Checked exception are compile time .
+	->Unchecked exception are non-recoverable exception it stops the program flow and cause error.
+	->It all runtime exceptions.
+
+->Oop concepts
+	->Encapsulation refers to the bundling of data (attributes) and methods (functions) that operate on the data into a single unit called an "object." 
+		It hides the internal state of an object from the outside world and only exposes the necessary functionality through well-defined interfaces.
+	->Abstraction is the process of simplifying complex systems by modeling only the relevant aspects while hiding unnecessary details. 
+		It allows developers to focus on what an object does rather than how it does it. Abstract classes and interfaces are used to define abstract concepts in OOP.
+	-> Inheritance is a mechanism where a new class (subclass or derived class) inherits properties and behaviors (attributes and methods) from an existing class 
+		(superclass or base class).It promotes code reuse and establishes a hierarchical relationship between classes, enabling polymorphic behavior.
+	->Polymorphism allows objects of different classes to be treated as objects of a common superclass, enabling dynamic method invocation and code flexibility. 
+		It can be achieved through method overriding (runtime polymorphism) and method overloading (compile-time polymorphism).
+
+->access modifier class
+	->we can only have public, abstract, final modifier as the outer class. But inner class has all modifiers
+	->If you declare class A - it measn package-private that is it can be accessed by only inside package.
+	->you cannot decalre default class A but can do class A, because java doesnt have reserved default keyword for outer class
+
+->abstract vs interface
+	->if you use abstract u have to extend which means it can have only one extend class.But interface implments u can have many.
+	->abstract and interfaace both cannot be instantiated( we canot create an objects). We can keep it reference.
+	->abstract can have both concrete and abstract method. While interface can only have abstract
+
+->this keyword
+	->this keyword refer to the current object within the class or constructor
+
+->Autoboxing and Unboxing
+	->autobaxing is converting int to Integer (primitive to wrapper)
+	->unboxing is conversion of Integer to int (wrapper to primitive)
+->StringBuilder vs StringBuffer
+	->StringBUilder is faster than Stringbuffer
+	->StringBUidler is not thread safe whereas Stringbuffer is thread safe
+	->Stringbuilder is not sychronised whreas stringbuffer is synchronised
+	->If thread safety is not a concern and you need better performance in a single-threaded environment, use StringBuilder.
+	->If thread safety is required or multiple threads will access the string buffer concurrently, use StringBuffer.
+	->Stringbuffer is in java 1.0 older version while stringbuilder comes java 1.5
+
+->finalize
+	->It an method that called by garbage collector before the garbage collector deletes the unreferrence objects in heap
+	->we can override it to write some functionality. That need to be done before the garbage collector delete the objects
+
+->Sychronisation
+	->To make a method sychronised use sychorinised keyword "public sychronised void int(){}".
+	->In a sychronised method one thread can access it at a time, other thread has to wait until it finishes.
+	->Multiple thread access happens only concurrently.
+
+->volatile keyword
+	->its a keyword for variable that ensure changes made by one thread to the variable visible to others.
+	->The primary purpose of volatile is to provide a lightweight synchronization mechanism for variables that are shared among multiple threads, 
+		without the overhead of acquiring and releasing locks associated with synchronized methods or blocks.
+->transient
+	->In Java, the transient keyword is used to indicate that a member variable of a class should not be serialized when the object is serialized.
+	->Serialization is the process of converting an object into a stream of bytes to store it in memory, send it over a network, or persist it to a file.
+	->it used to hold sensitive info like password from being serialised
+ 
+->hashmap vs hashtable
+	->hashmap is not sychronised, hashtable is sychronised.
+	->hashmap allows one null key and multiple null values, hashtable does not allow null key and null values.
+
+->multiple inheritance
+	->In java multiple inheritance is not allowed.Because it cause "diamond problem".
+	->But it can be acheived by interface.
+
+->super
+	->super keyword refers to superclass of the current class.
+	->it can used to access members of parentclass super.member;
+	->can be used invoke parent class constructor super();
+
+->abstract
+	->a class has to be abstract if it has atleast one abstract method.
+	->an abstract method is method with definition.
+
+->interface
+	->u can only have abstarct method, static method and default method int it
+	->u cannot have concerete method in it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

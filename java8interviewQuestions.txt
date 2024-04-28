@@ -1,0 +1,9 @@
+->Functional Interface
+	->Functional Interface are interface that have only abstract method.
+	->They serve as the basis for lambda expressions and method references, allowing you to pass behavior around as if it were data.
+	->U can have static and default method.
+	->supplier, consumer, Function, Predicate, unaryoperator,BinaryOperator,BiFunction, Biconsumer.These used to write lambda expression.
+->Lamda expression
+	->Its an expression used to create anonymous function.
+	->it reduce code writing make it concise and compact.
+->
