@@ -1,7 +1,7 @@
 MY SQL
 SQL- Structured Query Language
 ->SQL is a computer language we used to interact with relational database.
-->SQL is a tool for organising, managing and archievin data from computer database.
+->SQL is a tool for organising, managing and archiving data from computer database.
 
 Overview
 ->DDL(Data definition language)
@@ -14,7 +14,7 @@ Overview
 	->RENAME: Used to rename an existing database object.
 	->COMMENT: Used to add comments to the data dictionary.
 -------------------------------------------------------------
-->DML(data manupulating language)
+->DML(data manipulating language)
  ->DML stands for Data Manipulation Language. It is a subset of SQL (Structured Query Language) used for manipulating data within the database.
    DML statements are used to query, insert, update, and delete data in database tables.
 	->INSERT: Used to add new rows of data into a table.
@@ -45,21 +45,21 @@ DQL statements are specifically designed for retrieving data and do not modify t
 
 DB level operations
 How to create a DB:
-->create database db_name;
+->CREATE DATABASE db_name;
 
 How to drop or delete a DB:
-->drop database db_name;
+->DROP DATABASE db_name;
 
 How to backupDB
-->backup database db_name to disk="D:\1.RasheedAhamed\db_name.bak";  
+->BACKUP DATABASE db_name TO DISK="D:\1.RasheedAhamed\db_name.bak";  
 (this will backup the db in the filpath)
 
-->backup database db_name to disk="D:\1.RasheedAhamed\db_name.bak" with differential;
+->BACKUP DATABASE db_name TO DISK="D:\1.RasheedAhamed\db_name.bak" WITH DIFFERENTIAL;
 (this will also take backup but if you already have backup it will take backup of all new changes)
 
 
 table operations
-->create table table_name(
+->CREATE TABLE table_name(
 	column1 datatype,
 	column2 datatype,
 	column3 datatype,
@@ -75,9 +75,9 @@ select id,name
 from testa;
 
 Delete a table 
-->drop table table_name (the table will be lost)
+->DROP TABLE table_name (the table will be lost)
 or
-->truncate table table_name ( the table content lost but structure stays)
+->TRUNCATE TABLE table_name ( the table content lost but structure stays)
 
 -----------------------------------------------------------------------------------------------------
 DROP VS TRUNCATE
@@ -90,7 +90,170 @@ Effect: When you truncate a table, you delete all rows from the table, effective
 Unlike DROP, the table structure remains intact, and any associated triggers are not fired.
 ------------------------------------------------------------------------------------------------------
 
-How to alter table contents:
+alter: used to alter or modify the table 
+how to add extra column 
+->ALTER TABLE table_name ADD COLUMN column_name;
+
+drop a single column
+->ALTER TABLE table_name DROP COLUMN column_name;
+
+alter/modify a column :
+->ALTER TABLE table_name MODIFY column_name dataType;
+
+-----------------------------------------------------------------------------------------------------
+Constraints:
+->sql constraints are used to specify rules on data in the table.
+->Two types  ---- Column level column and table level column.
+->column level only apply to column table level apply to whole table.
+
+The following constraints are commonly used in SQL:
+
+->NOT NULL - Ensures that a column cannot have a NULL value
+->UNIQUE - Ensures that all values in a column are different
+->PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+->FOREIGN KEY - Prevents actions that would destroy links between tables
+->CHECK - Ensures that the values in a column satisfies a specific condition
+->DEFAULT - Sets a default value for a column if no value is specified
+->CREATE INDEX - Used to create and retrieve data from the database very quickly
+
+CREATE TABLE table_name(
+column_name DATATYPE CONSTRAINTS,
+.....);
+---------------------------------------------------------------------------------------------------
+Eg:
+NOT NULL:
+->CREATE TABLE table_name(
+orderid INTEGER NOT NULL,
+name VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL);	
+
+->ALTER TABLE table_name MODIFY column_name datatype CONSTRAINTS;
+EG: -> ALTER TABLE test MODIFY name VARCHAR(255) NOT NULL
+-->NOT NULL CAN ONLY BE USED COLUMN LEVEL, we cant use not null in down to make multiple column not null.
+---------------------------------------------------------------------------------------
+UNIQUE:
+we can have multiple constraint in single column
+->CREATE TABLE table_name(
+orderid INTEGER NOT NULL UNIQUE,
+name VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL);	
+
+we can alternatively write like
+->CREATE TABLE table_name(
+orderId INTEGER NOT NULL,
+name VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+UNIQUE(orderID));
+
+To make constraints in multiple column we have to give in bottom
+->CREATE TABLE table_name(
+orderId INTEGER NOT NULL,
+name VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+CONSTRAINT name UNIQUE(orderID, name));
+
+To drop constraints in multiple column
+ALTER TABLE table_name DROP CONSTRAINT constraint_name;
+
+--> By naming a constraint we can have constraint to multiple column, also we can drop the constraint in multiple column simultaneously.
+----------------------------------------------------------------------------------------
+PRIMARY KEY: it is a combination of NOT NULL AND UNIQUE
+-->a table can have only one primary key
+eg:
+->CREATE TABLE table_name(
+orderId INTEGER PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL
+);
+
+-->A composite primary key, also known as a compound primary key, is a primary key that consists of multiple columns in a database table. 
+Unlike a single-column primary key, which uniquely identifies each row in a table based on the values in a single column, 
+a composite primary key uses the combination of values from multiple columns to uniquely identify each row.
+
+eg:
+->CREATE TABLE table_name(
+orderId INTEGER NOT NULL,
+name VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+CONSTRAINT name PRIMARY KEY(orderID, name));
+
+->Here orderID and name column combine to form a primary key.
+
+->Composite primary keys are useful in situations where a single column cannot uniquely identify each row, but a combination of multiple columns can
+-----------------------------------------------------------------------------------------------------------
+FOREIGN KEY :it used to prevent actions that destroy link between table
+->A foreign key in a table refers to primary key in another table.
+->The table with the foreign key is called the child table, and the table with the primary key is called the referenced or parent table.
+
+FOREIGN KEY (Column1) REFERENCES OtherTable (ReferencedColumn)
+eg:
+->CREATE TABLE TableName (
+    Column1 DataType,
+    Column2 DataType,
+    ...
+    CONSTRAINT FK_Name FOREIGN KEY (Column1) REFERENCES OtherTable (ReferencedColumn)
+);
+
+---------------------------------------------------------------------------------------------------------------
+CHECK:
+->it used to restrict the value that can be placed in the table.
+
+eg:
+->CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CHECK (Age>=18)
+);
+
+we can have multiple check condition
+->CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    City varchar(255),
+    CONSTRAINT CHK_Person CHECK (Age>=18 AND City='Sandnes')
+);
+-----------------------------------------------------------------------------------------------------------------
+DEFAULT:
+->Used to set default values in the column
+eg:
+->CREATE TABLE Orders (
+    ID int NOT NULL,
+    OrderNumber int NOT NULL,
+    OrderDate date DEFAULT GETDATE()
+);
+
+------------------------------------------------------------------------------------------------------------------
+CREATE INDEX:
+->indexes are used to retrieve data from database very quickly.
+
+CREATE INDEX index_name
+ON table_name (column1, column2, ...);
+-> this will create index can have duplicate values
+
+CREATE UNIQUE INDEX index_name
+ON table_name (column1, column2, ...);
+->this will only create index with unique values
+------------------------------------------------------------------------------------------------------------------
+AUTO INCREMENT:
+->Auto-increment allows a unique number to be generated automatically when a new record is inserted into a table.
+->By default auto increment start from 1.
+
+eg:
+->CREATE TABLE Persons (
+    Personid int NOT NULL AUTO_INCREMENT,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (Personid)
+);
+
+To let auto increment start from a particular value
+->ALTER TABLE Persons AUTO_INCREMENT=100;
+-------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -99,4 +262,36 @@ How to alter table contents:
 
 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,4 +6,16 @@
 ->Lamda expression
 	->Its an expression used to create anonymous function.
 	->it reduce code writing make it concise and compact.
+
+How to write a lambda expression:
+@funtionalInterface
+public interface Test{
+	void test();
+}
+
+public class Main{
+ void main(){
+	Test t=()->System.out.println("hi i am lambda);
+}
+
 ->
