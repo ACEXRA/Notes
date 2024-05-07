@@ -1,4 +1,6 @@
 MY SQL
+
+W3 schools MySQL good place to learn
 SQL- Structured Query Language
 ->SQL is a computer language we used to interact with relational database.
 ->SQL is a tool for organising, managing and archiving data from computer database.
@@ -255,29 +257,421 @@ To let auto increment start from a particular value
 ->ALTER TABLE Persons AUTO_INCREMENT=100;
 -------------------------------------------------------------------------------------------------------------------
 
+DATE:
+MySQL comes with the following data types for storing a date or a date/time value in the database:
+
+DATE - format YYYY-MM-DD
+DATETIME - format: YYYY-MM-DD HH:MI:SS
+TIMESTAMP - format: YYYY-MM-DD HH:MI:SS
+YEAR - format YYYY or YY
+-------------------------------------------------------------------------------------------------------
+CREATE VIEW :
+-> It is used to view a virtual table based on set of SQL statement.
+->CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+eg:
+->CREATE VIEW [Brazil Customers] AS
+SELECT CustomerName, ContactName
+FROM Customers
+WHERE Country = 'Brazil';
+
+To update a view 
+CREATE OR REPLACE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+--------------------------------------------------------------------------------------------------------
+DATATYPES:
+-> all the datatypes available in my sql
+
+String Data Types:
+->CHAR(size):A FIXED length string (can contain letters, numbers, and special characters).The size parameter specifies the column length in characters - can be from 0 to 255. Default is 1
+
+->VARCHAR(size):A VARIABLE length string (can contain letters, numbers, and special characters).The size parameter specifies the maximum string length in characters - can be from 0 to 65535.
+
+->BINARY(size): Equal to CHAR(), but stores binary byte strings. The size parameter specifies the column length in bytes. Default is 1
+
+->VARBINARY(size):Equal to VARCHAR(), but stores binary byte strings. The size parameter specifies the maximum column length in bytes.
+
+->TINYBLOB: For BLOBs (Binary Large Objects). Max length: 255 bytes
+
+->TINYTEXT: Holds a string with a maximum length of 255 characters
+
+->TEXT(size): Holds a string with a maximum length of 65,535 bytes
+
+->BLOB(size): For BLOBs (Binary Large Objects). Holds up to 65,535 bytes of data
+
+->MEDIUMTEXT: Holds a string with a maximum length of 16,777,215 characters
+
+->MEDIUMBLOB: For BLOBs (Binary Large Objects). Holds up to 16,777,215 bytes of data
+
+->LONGTEXT: Holds a string with a maximum length of 4,294,967,295 characters
+
+->LONGBLOB: For BLOBs (Binary Large Objects). Holds up to 4,294,967,295 bytes of data
+
+->ENUM(val1, val2, val3, ...)	A string object that can have only one value, chosen from a list of possible values. You can list up to 65535 values in an ENUM list. If a value is inserted that is not in the list, a blank value will be inserted. The values are sorted in the order you enter them
+
+->SET(val1, val2, val3, ...)	A string object that can have 0 or more values, chosen from a list of possible values. You can list up to 64 values in a SET list
+
+----------------------------------------------------------------------------------------------------------
+
+Numeric Data Types:
+->BIT(size): A bit-value type. The number of bits per value is specified in size. The size parameter can hold a value from 1 to 64. The default value for size is 1.
+
+->TINYINT(size): A very small integer. Signed range is from -128 to 127. Unsigned range is from 0 to 255. The size parameter specifies the maximum display width (which is 255)
+
+->BOOL: Zero is considered as false, nonzero values are considered as true.
+
+->BOOLEAN: Equal to BOOL
+
+->SMALLINT(size): A small integer. Signed range is from -32768 to 32767. Unsigned range is from 0 to 65535. The size parameter specifies the maximum display width (which is 255)
+
+->MEDIUMINT(size): A medium integer. Signed range is from -8388608 to 8388607. Unsigned range is from 0 to 16777215. The size parameter specifies the maximum display width (which is 255)
+
+->INT(size): A medium integer. Signed range is from -2147483648 to 2147483647. Unsigned range is from 0 to 4294967295. The size parameter specifies the maximum display width (which is 255)
+
+->INTEGER(size): Equal to INT(size)
+
+->BIGINT(size): A large integer. Signed range is from -9223372036854775808 to 9223372036854775807. Unsigned range is from 0 to 18446744073709551615. The size parameter specifies the maximum display width (which is 255)
+
+->FLOAT(size, d): A floating point number. The total number of digits is specified in size. The number of digits after the decimal point is specified in the d parameter. This syntax is deprecated in MySQL 8.0.17, and it will be removed in future MySQL versions
+
+->FLOAT(p): A floating point number. MySQL uses the p value to determine whether to use FLOAT or DOUBLE for the resulting data type. If p is from 0 to 24, the data type becomes FLOAT(). If p is from 25 to 53, the data type becomes DOUBLE()
+
+->DOUBLE(size, d): A normal-size floating point number. The total number of digits is specified in size. The number of digits after the decimal point is specified in the d parameter
+
+->DOUBLE PRECISION(size, d)
+	 
+->DECIMAL(size, d): An exact fixed-point number. The total number of digits is specified in size. The number of digits after the decimal point is specified in the d parameter. The maximum number for size is 65. The maximum number for d is 30. The default value for size is 10. The default value for d is 0.
+
+->DEC(size, d)	Equal to DECIMAL(size,d)
+
+------------------------------------------------------------------------------------------------------------
+
+Date and Time Data Types:
+
+->DATE: A date. Format: YYYY-MM-DD. The supported range is from '1000-01-01' to '9999-12-31'
+
+->DATETIME(fsp): A date and time combination. Format: YYYY-MM-DD hh:mm:ss. The supported range is from '1000-01-01 00:00:00' to '9999-12-31 23:59:59'. Adding DEFAULT and ON UPDATE in the column definition to get automatic initialization and updating to the current date and time
+
+->TIMESTAMP(fsp): A timestamp. TIMESTAMP values are stored as the number of seconds since the Unix epoch ('1970-01-01 00:00:00' UTC). Format: YYYY-MM-DD hh:mm:ss. The supported range is from '1970-01-01 00:00:01' UTC to '2038-01-09 03:14:07' UTC. Automatic initialization and updating to the current date and time can be specified using DEFAULT CURRENT_TIMESTAMP and ON UPDATE 
+
+->CURRENT_TIMESTAMP in the column definition
+
+->TIME(fsp): A time. Format: hh:mm:ss. The supported range is from '-838:59:59' to '838:59:59'
+
+->YEAR: A year in four-digit format. Values allowed in four-digit format: 1901 to 2155, and 0000.
+
+-----------------------------------------------------------------------------------------------------------------
+
+SELECT : 
+->Used to select content of table based on condition
+eg:
+->SELECT * FROM table_name (slect all values and show in table).
+->SELECT column1, column2.. from table_name (show the column alone in table ).
+
+-----------------------------------------------------------------------------------
+SELECT DISTINCT:
+->The SELECT DISTINCT statement is used to return only distinct (different) value
+eg:
+->SELECT DISTINCT column1, column2, ...
+FROM table_name;
+-----------------------------------------------------------------------------
+WHERE
+->The WHERE clause is used to filter records.
+->It is used to extract only those records that fulfill a specified condition.
+EG:
+->SELECT column1, column2, ...
+  FROM table_name
+  WHERE condition;
+we can use these operators
+=	Equal	
+>	Greater than	
+<	Less than	
+>=	Greater than or equal	
+<=	Less than or equal	
+<>	Not equal. Note: In some versions of SQL this operator may be written as !=	
+BETWEEN	Between a certain range	
+LIKE	Search for a pattern	
+IN	To specify multiple possible values for a column
+-----------------------------------------------------------------------
+ORDER BY
+eg:
+->SELECT column1, column2, ...
+FROM table_name
+ORDER BY column1, column2, ... ASC|DESC;
+-----------------------------------------------------------------------
+AND:
+used to do multiple condition in WHERE condition
+eg:
+->SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 AND condition2 AND condition3 ...;
+---------------------------------------------------------------------
+OR:
+The OR operator is used to filter records based on more than one condition
+eg:
+->SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 OR condition2 OR condition3 ...;
+---------------------------------------------------------------------
+NOT:
+The NOT operator is used in combination with other operators to give the opposite result, also called the negative result.
+eg: SELECT column1, column2, ...
+FROM table_name
+WHERE NOT condition;
+
+----------------------------------------------------------------------------
+
+INSERT INTO
+->The INSERT INTO statement is used to insert new records in a table.
+eg:
+->INSERT INTO table_name (column1, column2, column3, ...)
+VALUES (value1, value2, value3, ...);
+
+-->If you are adding values for all the columns of the table, you do not need to specify the column names
+eg:
+->INSERT INTO table_name
+VALUES (value1, value2, value3);
+
+------------------------------------------------------------------------------
+NULL VALUES
+->A field with a NULL value is a field with no value.
+->It is not possible to test for NULL values with comparison operators, such as =, <, or <>.
+
+SELECT column_names
+FROM table_name
+WHERE column_name IS NULL;
+(or)
+SELECT column_names
+FROM table_name
+WHERE column_name IS NOT NULL;
+-------------------------------------------------------------------------------
+UPDATE:
+update existing values in table
+eg:
+->UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+--------------------------------------------------------------------------
+DELETE:
+->The DELETE statement is used to delete existing records in a table.
+eg:
+->DELETE FROM table_name WHERE condition;
+->DELETE from table_name (this command can delete all records of tabl without deleting table structure like TRUNCATE)
+-------------------------------------------------------------------------
+SELECT TOP:
+->This used to specify number of records to return.
+eg:
+->SELECT TOP 3 * from customers
+->SELECT TOP 50 PERCENT * FROM Customers;(this command will be return 50% of customers).
+----------------------------------------------------------------------------
+LIMIT
+->This also used to specify number of rcords to return.
+eg:
+>SELECT column_name(s)
+FROM table_name
+WHERE condition
+LIMIT number;
+---------------------------------------------------------------------------
+AGGREGATE FUNCTIONS:
+
+->An aggregate function is a function that performs a calculation on a set of values, and returns a single value.
+->Aggregate functions are often used with the GROUP BY clause of the SELECT statement
+->The most commonly used SQL aggregate functions are:
+
+->MIN() - returns the smallest value within the selected column
+->MAX() - returns the largest value within the selected column
+->COUNT() - returns the number of rows in a set
+->SUM() - returns the total sum of a numerical column
+->AVG() - returns the average value of a numerical column
+
+---------------------------------------------------------------------------------
+MIN:
+->this will return return smallest value in selected column.
+eg:
+SELECT MIN(column_name) FROM table_name ;
+--------------------------------------------------------------
+MAX:
+->This return largest value in selected column.
+eg:
+SELECT MAX(column_name) FROM table_name;
+-------------------------------------------------------------
+AS:
+ we can make alias (name to the column) 
+eg:
+->SELECT MIN(Price) AS SmallestPrice FROM Products;
+----------------------------------------------------
+COUNT:
+->this return the number of records in the column.
+eg:
+->SELECT COUNT(column_name)
+FROM table_name
+WHERE condition;
+-------------------------------------------------------------
+SUM:
+->return total numeric sum of records
+->The parameter inside the SUM() function can also be an expression.
+eg:
+->SELECT SUM(column_name)
+FROM table_name
+WHERE condition;
+ eg:
+->SELECT SUM(Quantity * 10)
+FROM OrderDetails;
+Note :if you try this on string error:Data type mismatch in criteria expression.
+----------------------------------------------------------------
+AVG:
+->The AVG() function returns the average value of a numeric column.
+eg:
+->SELECT AVG(column_name)
+FROM table_name
+WHERE condition;
+
+-----------------------------------------------------------------
+LIKE:
+->The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+->There are two wildcards often used in conjunction with the LIKE operator:
+	->The percent sign % represents zero, one, or multiple characters
+	->The underscore sign _ represents one, single character
+
+eg:
+->SELECT column1, column2, ...
+FROM table_name
+WHERE columnN LIKE pattern;
+--------------------------------------------------------------------
+Wildcard characters:
+->A wildcard character is used to substitute one or more characters in a string.
+-> %	Represents zero or more characters
+-> _	Represents a single character
+-> []	Represents any single character within the brackets *
+-> !	Represents any character not in the brackets *
+-> -	Represents any single character within the specified range *
+-> {}	Represents any escaped character **
+-----------------------------------------------------------------------
+IN:
+->The IN operator allows you to specify multiple values in a WHERE clause.
+
+eg:
+->SELECT column_name(s)
+FROM table_name
+WHERE column_name IN (value1, value2, ...);
+
+->NOT IN operator is opposite of it
+------------------------------------------------------------------------
+
+BETWEEN:
+->The BETWEEN operator selects values within a given range. The values can be numbers, text, or dates.
+
+eg:
+->SELECT column_name(s)
+FROM table_name
+WHERE column_name BETWEEN value1 AND value2;
+
+->NOT BETWEEN is opposite of it.
+-------------------------------------------------------------------------
+
+SQL alias
+->SQL aliases are used to give a table, or a column in a table, a temporary name.
+->Aliases are often used to make column names more readable.
+->An alias only exists for the duration of that query.
+
+eg:
+->SELECT column_name AS alias_name
+FROM table_name;
+
+eg:
+->SELECT column_name(s)
+FROM table_name AS alias_name;
+
+----------------------------------------------------------------------
+CONCAT
+->used to concatenate column values and display it together
+
+eg:
+->SELECT CustomerName, CONCAT(Address,', ',PostalCode,', ',City,', ',Country) AS Address
+FROM Customers;
+--------------------------------------------------------------------
+SQL JOINS
+->A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+
+types of joins
+->(INNER) JOIN: Returns records that have matching values in both tables
+->LEFT (OUTER) JOIN: Returns all records from the left table, and the matched records from the right table
+->RIGHT (OUTER) JOIN: Returns all records from the right table, and the matched records from the left table
+->FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table
+
+-------------------------------------------------------------------------
+INNER JOIN:
+->The INNER JOIN keyword selects records that have matching values in both tables
+->JOIN and INNER JOIN will return the same result.
+eg:
+->SELECT column_name(s)
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name;
+
+---------------------------------------------------------------------------
+LEFT JOIN
+->The LEFT JOIN keyword returns all records from the left table (table1), and the matching records from the right table (table2). 
+->The result is 0 records from the right side, if there is no match.
+
+eg:
+->SELECT column_name(s)
+FROM table1
+LEFT JOIN table2
+ON table1.column_name = table2.column_name;
+
+->Note: The LEFT JOIN keyword returns all records from the left table (Customers), even if there are no matches in the right table (Orders).
+
+--------------------------------------------------------------------------------
+RIGHT JOIN
+->The RIGHT JOIN keyword returns all records from the right table (table2), and the matching records from the left table (table1). 
+->The result is 0 records from the left side, if there is no match.
+
+EG:
+->SELECT column_name(s)
+FROM table1
+RIGHT JOIN table2
+ON table1.column_name = table2.column_name;
+
+->Note: The RIGHT JOIN keyword returns all records from the right table (Employees), even if there are no matches in the left table (Orders).
+
+----------------------------------------------------------------------------------------
+FULL OUTER JOIN:
+->The FULL OUTER JOIN keyword returns all records when there is a match in left (table1) or right (table2) table records.
+->FULL OUTER JOIN and FULL JOIN are the same.
+
+eg:
+->SELECT column_name(s)
+FROM table1
+FULL OUTER JOIN table2
+ON table1.column_name = table2.column_name
+WHERE condition;
+
+-------------------------------------------------------------------------------------------------
+UNION:
+->The UNION operator is used to combine the result-set of two or more SELECT statements.
+->The UNION operator selects only distinct values by default. To allow duplicate values, use UNION ALL:
 
 
+eg:
+->SELECT column_name(s) FROM table1
+UNION
+SELECT column_name(s) FROM table2;
+--------------------------------------------------------------------------------------------
+GROUP BY:
+->"GROUP BY" is a clause in SQL (Structured Query Language) that is used with the SELECT statement to organize rows into groups based on the values of one or more columns. 
+->It's commonly used in conjunction with aggregate functions like SUM(), COUNT(), AVG(), MAX(), or MIN() to perform calculations on each group.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+eg:
+->SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+ORDER BY column_name(s);
 
 
 
