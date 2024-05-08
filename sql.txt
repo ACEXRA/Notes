@@ -673,6 +673,130 @@ WHERE condition
 GROUP BY column_name(s)
 ORDER BY column_name(s);
 
+---------------------------------------------------------------------------------------------------
+HAVING:
+->The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.
+
+eg:
+->SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+HAVING condition
+ORDER BY column_name(s);
+
+--------------------------------------------------------------------------------------------------
+EXISTS:
+->The EXISTS operator is used to test for the existence of any record in a subquery.
+->The EXISTS operator returns TRUE if the subquery returns one or more records.
+
+eg:
+->SELECT column_name(s)
+FROM table_name
+WHERE EXISTS
+(SELECT column_name FROM table_name WHERE condition);
+
+----------------------------------------------------------------------------------------------
+ALL:
+->The ALL operator:
+->returns a boolean value as a result
+->returns TRUE if ALL of the subquery values meet the condition
+->is used with SELECT, WHERE and HAVING statements
+
+eg:
+->SELECT column_name(s)
+FROM table_name
+WHERE column_name operator ALL
+  (SELECT column_name
+  FROM table_name
+  WHERE condition);
+
+-------------------------------------------------------------------------------------------
+ANY:
+->The ANY operator:
+->returns a boolean value as a result
+->returns TRUE if ANY of the subquery values meet the condition
+
+eg:
+->SELECT column_name(s)
+FROM table_name
+WHERE column_name operator ANY
+  (SELECT column_name
+  FROM table_name
+  WHERE condition);
+
+-----------------------------------------------------------------------------------
+SELECT INTO:
+->The SELECT INTO statement copies data from one table into a new table.
+
+eg:
+->SELECT column1, column2, column3, ...
+INTO newtable [IN externaldb]
+FROM oldtable
+WHERE condition;
+->note use * in place of column1, column... to completely copy
+------------------------------------------------------------------------------
+INSERT INTO:
+->The INSERT INTO SELECT statement copies data from one table and inserts it into another table.
+->The INSERT INTO SELECT statement requires that the data types in source and target tables match.
+->Note: The existing records in the target table are unaffected.
+
+eg:
+->INSERT INTO table2 (column1, column2, column3, ...)
+SELECT column1, column2, column3, ...
+FROM table1
+WHERE condition;
+
+----------------------------------------------------------------------------
+
+CASE:
+
+->The CASE expression goes through conditions and returns a value when the first condition is met (like an if-then-else statement). 
+->So, once a condition is true, it will stop reading and return the result. If no conditions are true, it returns the value in the ELSE clause.
+->If there is no ELSE part and no conditions are true, it returns NULL.
+
+eg:
+->CASE
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    WHEN conditionN THEN resultN
+    ELSE result
+END;
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+STORED PROCEDURE:
+
+->A stored procedure is a prepared SQL code that you can save, so the code can be reused over and over again.
+
+eg:
+->CREATE PROCEDURE procedure_name
+AS
+sql_statement
+GO;
+
+to execute ->EXEC procedure_name;
+
+--------------------------------------------------------------------------------------------------------------------
+COMMENT LINE:
+
+-> --using this make a comment line
+/*this is for 
+multiple line commment*/
+-------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
